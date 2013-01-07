@@ -3,10 +3,11 @@
 import datetime
 
 import random
+import math
 from turtle import *
 
 
-class Points(object):
+class Point(object):
 	
 	def __init__(self, x, y):
 		self.x = x
@@ -21,6 +22,16 @@ class Points(object):
 	def afficher(self):
 		print "Point de coordonnées : (" + str(self.x) +", " + str(self.y) + ")"
 
+class Arc(object):
+
+	def __init__(self, pointA, pointB):
+		self.distance = sqrt( (pointB.getX() - pointA.getX())**2 + (pointB.getY() - pointA.getY())**2 )
+
+	def getDistance(self):
+		return self.distance	
+	
+	def afficher(self):
+		print "L'arc est de longueur : " +str(self.distance)
 
 
 # Class polygone : elle va nous permettre de créer notre polygone
@@ -30,12 +41,14 @@ class Polygone(object):
 		self.nSommets = nSommets
 
 		# Initilisation du polygone, premier point
-		pointA = Points(0,0)
+		pointA = Point(0,0)
 		self.mesSommets = [pointA]
 
 		# Le reste des points
-		pointB = Points( random.randint(0, 10), random.randint(0, 10) )
+		pointB = Point( random.randint(0, 10), random.randint(0, 10) )
 		pointB.afficher()
+		arcA = Arc(pointA, pointB)
+		arcA.afficher()
 
 	def printNSommets(self):
 		print self.nSommets
